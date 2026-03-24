@@ -22,7 +22,7 @@ app.post('/api/server', async (req, res) => {
     Generate a creative, interactive Bootstrap 5 HTML snippet that represents the EXACT OPPOSITE of that guess.
     Rules:
     1. Use modern Bootstrap 5 classes.
-    2. Provide ONLY the HTML code inside a <div>. No markdown backticks, no explanations.
+    2. Provide ONLY the HTML code inside a <div>. No markdown backticks, no explanations. Give code in such a way that the website looks completely different each time. I will be replacing it using body.InnerHTML()
     3. Make it ironic or funny.`;
 
     try {
