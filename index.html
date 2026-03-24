@@ -43,7 +43,7 @@
             contentDiv.innerHTML = '';
 
             try {
-                const response = await fetch('http://localhost:3000/generate-opposite', {
+                const response = await fetch('/api/server', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ userGuess: guess })
