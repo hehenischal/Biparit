@@ -3,15 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    To maximize Bootstrap 5 and clean up the code, I have replaced custom CSS layout properties with Bootstrap's utility classes (like vh-100, rounded-4, shadow, and bg-dark). I kept only the essential "glassmorphism" and "gradient" styles that Bootstrap doesn't provide natively, while stripping out any manual positioning that could conflict with the framework's grid system.
-
-HTML
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Biparit | The Future of Generative Reality</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
@@ -78,21 +69,6 @@ HTML
             100% { transform: rotate(360deg); }
         }
     </style>
-    <title>Biparit | The Future of Generative Reality</title>
-    <meta name="title" content="Biparit | The Future of Generative Reality">
-    <meta name="description" content="Experience the world's first Neural Subversion Engine. Transform your digital expectations into absolute, high-fidelity disappointment.">
-    
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://biparit.vercel.app/">
-    <meta property="og:title" content="Biparit | Generative Subversion Engine">
-    <meta property="og:description" content="Harnessing LLMs to deliver industry-leading disappointment. What you expect is exactly what you won't get.">
-    <meta property="og:image" content="https://biparit.vercel.app/og-image.png">
-    
-    <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://biparit.vercel.app/">
-    <meta property="twitter:title" content="Biparit | Neural Disappointment">
-    <meta property="twitter:description" content="Stop being satisfied. Start being disappointed. Powered by Biparit AI.">
-    <meta property="twitter:image" content="https://biparit.vercel.app/og-image.png">
 </head>
 <body class="d-flex align-items-center">
 
@@ -109,7 +85,7 @@ HTML
                         
                         <div class="input-group input-group-lg mb-3">
                             <input type="text" id="userGuess" class="form-control glass-input py-3" placeholder="e.g. A peaceful Zen garden">
-                            <button class="btn modern-btn px-4 text-dark" id="goBtn" onclick="generateOpposite()">Check for yourself</button>
+                            <button class="btn modern-btn px-4 text-dark" id="goBtn" onclick="generateOpposite()">REVEAL</button>
                         </div>
                     </div>
 
@@ -133,12 +109,7 @@ HTML
             "Optimizing for emotional damage...",
             "Subverting expectations at 10 kbps...",
             "Consulting the oracle of disappointment...",
-            "Injecting Bootstrap into your reality...",
-            "Almost there, don't get excited...",
-            "Your Internet is way too slow...",
-            "Your ISP is training an AI to make you pay on time...",
-            "Fetching Data from Iranian Data Centers...",
-            "Evaporating 30 Liters of Fresh Water...",
+            "Injecting Bootstrap into your reality..."
         ];
 
         let messageInterval;
@@ -156,11 +127,9 @@ HTML
 
             if(!guess) return alert("You must provide a vision to have it crushed.");
 
-            // UI Transition
             interactionArea.classList.add('d-none');
-            loader.style.display = 'flex';
+            loader.classList.remove('d-none');
             
-            // Start rotating status messages
             messageInterval = setInterval(updateStatus, 1800);
 
             try {
@@ -171,21 +140,19 @@ HTML
                 });
                 const data = await response.json();
                 
-                // Fade out main UI before replacing body
                 mainContainer.style.opacity = '0';
                 
                 setTimeout(() => {
                     clearInterval(messageInterval);
                     document.body.innerHTML = data.html;
-                    document.body.style.background = "white"; // Switch to light mode for maximum disappointment
-                    document.body.style.color = "black";
+                    document.body.className = "bg-white text-dark p-4"; 
                     window.scrollTo(0, 0);
                 }, 500);
 
             } catch (err) {
                 clearInterval(messageInterval);
                 loader.innerHTML = `<div class="text-danger">Failed to disappoint. Please try again.</div>`;
-                interactionArea.classList.remove('d-none');
+                setTimeout(() => location.reload(), 2000);
             }
         }
     </script>
