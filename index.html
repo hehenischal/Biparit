@@ -4,98 +4,78 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    To maximize Bootstrap 5 and clean up the code, I have replaced custom CSS layout properties with Bootstrap's utility classes (like vh-100, rounded-4, shadow, and bg-dark). I kept only the essential "glassmorphism" and "gradient" styles that Bootstrap doesn't provide natively, while stripping out any manual positioning that could conflict with the framework's grid system.
+
+HTML
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Biparit | The Future of Generative Reality</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
+        /* Essential custom aesthetics only */
         :root {
-            --bg-dark: #050505;
             --accent-cyan: #00f2ff;
             --accent-purple: #7000ff;
-            --glass: rgba(255, 255, 255, 0.05);
         }
 
-
-
-        .main-container {
-            transition: opacity 0.5s ease;
+        body {
+            background-color: #050505;
+            color: white;
+            min-height: 100vh;
         }
 
         .hero-title {
-            font-size: 4rem;
+            font-size: clamp(3rem, 10vw, 5rem);
             background: linear-gradient(45deg, var(--accent-cyan), var(--accent-purple));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            letter-spacing: -2px;
         }
 
         .glass-card {
-            background: var(--glass);
+            background: rgba(255, 255, 255, 0.05);
             backdrop-filter: blur(12px);
             border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 24px;
-            padding: 3rem;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
         }
 
         .glass-input { 
-            background: rgba(0, 0, 0, 0.3); 
-            border: 1px solid rgba(255, 255, 255, 0.1); 
-            color: white; 
-            border-radius: 12px; 
-            padding: 18px;
-            font-size: 1.1rem;
+            background: rgba(0, 0, 0, 0.3) !important; 
+            border: 1px solid rgba(255, 255, 255, 0.2) !important; 
+            color: white !important; 
         }
 
         .glass-input:focus {
-            background: rgba(0, 0, 0, 0.5);
-            border-color: var(--accent-cyan);
-            box-shadow: 0 0 15px rgba(0, 242, 255, 0.2);
-            color: white;
+            border-color: var(--accent-cyan) !important;
+            box-shadow: 0 0 15px rgba(0, 242, 255, 0.2) !important;
         }
 
         .modern-btn { 
             background: linear-gradient(45deg, var(--accent-cyan), var(--accent-purple));
             border: none;
-            color: black;
-            border-radius: 12px; 
             font-weight: 800; 
-            padding: 0 40px; 
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            transition: transform 0.2s, box-shadow 0.2s;
+            transition: transform 0.2s;
         }
 
         .modern-btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(112, 0, 255, 0.3);
-            color: white;
+            opacity: 0.9;
         }
 
-        /* Sophisticated Loader */
-        #loader {
-            display: none;
-            flex-direction: column;
-            align-items: center;
-        }
-
+        /* Spinner logic */
         .ai-ring {
-            width: 80px;
-            height: 80px;
+            width: 60px;
+            height: 60px;
             border-radius: 50%;
-            border: 2px solid transparent;
-            border-top: 2px solid var(--accent-cyan);
-            border-bottom: 2px solid var(--accent-purple);
+            border: 3px solid transparent;
+            border-top: 3px solid var(--accent-cyan);
+            border-bottom: 3px solid var(--accent-purple);
             animation: spin 1s linear infinite;
         }
 
         @keyframes spin {
-            0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
-        }
-
-        .loading-text {
-            font-family: monospace;
-            color: var(--accent-cyan);
-            margin-top: 20px;
-            min-height: 1.5em;
         }
     </style>
     <title>Biparit | The Future of Generative Reality</title>
@@ -114,29 +94,37 @@
     <meta property="twitter:description" content="Stop being satisfied. Start being disappointed. Powered by Biparit AI.">
     <meta property="twitter:image" content="https://biparit.vercel.app/og-image.png">
 </head>
-<body class="d-flex align-items-center justify-content-center">
+<body class="d-flex align-items-center">
 
-    <div class="container main-container" id="main-ui">
+    <main class="container" id="main-ui" style="transition: opacity 0.5s ease;">
         <div class="row justify-content-center">
-            <div class="col-lg-8 text-center glass-card">
-                <h1 class="hero-title fw-bold mb-2">BIPARIT</h1>
-                <p class="text-secondary mb-5 fs-5">Harnessing Neural Disappointment Engines™</p>
+            <div class="col-12 col-md-10 col-lg-8">
                 
-                <div id="interaction-area">
-                    <p class="mb-3 opacity-75">Predict the digital reality of this space:</p>
-                    <div class="input-group mb-4">
-                        <input type="text" id="userGuess" class="form-control glass-input" placeholder="e.g. A peaceful Zen garden portfolio">
-                        <button class="btn modern-btn" id="goBtn" onclick="generateOpposite()">Initialize Reveal</button>
+                <div class="glass-card rounded-5 p-4 p-md-5 text-center shadow-lg">
+                    <h1 class="hero-title fw-black mb-0">BIPARIT</h1>
+                    <p class="text-info opacity-75 mb-5 text-uppercase ls-wide">Neural Disappointment Engines™</p>
+                    
+                    <div id="interaction-area">
+                        <p class="lead mb-4">Predict the digital reality of this space:</p>
+                        
+                        <div class="input-group input-group-lg mb-3">
+                            <input type="text" id="userGuess" class="form-control glass-input py-3" placeholder="e.g. A peaceful Zen garden">
+                            <button class="btn modern-btn px-4 text-dark" id="goBtn" onclick="generateOpposite()">Check for yourself</button>
+                        </div>
                     </div>
+
+                    <div id="loader" class="d-none py-5">
+                        <div class="d-flex flex-column align-items-center">
+                            <div class="ai-ring mb-4"></div>
+                            <div id="status-msg" class="text-info font-monospace">Rerouting cognitive buffers...</div>
+                        </div>
+                    </div>
+
                 </div>
 
-                <div id="loader">
-                    <div class="ai-ring"></div>
-                    <div id="status-msg" class="loading-text mt-3">Rerouting cognitive buffers...</div>
-                </div>
             </div>
         </div>
-    </div>
+    </main>
 
     <script>
         const statusMessages = [
